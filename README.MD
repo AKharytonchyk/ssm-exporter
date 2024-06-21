@@ -14,18 +14,18 @@ These scripts allow you to export and import AWS SSM parameters to and from a JS
 
 This script exports AWS SSM parameters to a JSON file.
 
-#### Usage
+#### Export Usage
 
 ```bash
 ./export_ssm_params_to_json.sh [-p | --pathTemplate <path>] [-h | --help]
 ```
 
-#### Options
+#### Export Options
 
 - `-p, --pathTemplate` : Specify the path template for SSM parameters. If not provided, all parameters will be pulled.
 - `-h, --help` : Display the help message.
 
-#### Example
+#### Export Example
 
 ```bash
 ./export_ssm_params_to_json.sh -p /my/custom/path
@@ -37,17 +37,17 @@ If no path template is provided, the script will pull all parameters.
 
 This script imports AWS SSM parameters from a JSON file created by the export script.
 
-#### Usage
+#### Import Usage
 
 ```bash
 ./import_ssm_params_from_json.sh [-h | --help]
 ```
 
-#### Options
+#### Import Options
 
 - `-h, --help` : Display the help message.
 
-#### Example
+#### Import Example
 
 ```bash
 ./import_ssm_params_from_json.sh
@@ -55,13 +55,25 @@ This script imports AWS SSM parameters from a JSON file created by the export sc
 
 ## Usage
 
+1. **Configure AWS CLI**: Authenticate AWS CLI with first account.
+
+   ```bash
+   aws configure
+   ```
+
 1. **Export SSM Parameters**: Run the export script to save SSM parameters to `parameters.json`.
 
    ```bash
    ./export_ssm_params_to_json.sh -p /my/custom/path
    ```
 
-2. **Import SSM Parameters**: Run the import script to read from `parameters.json` and recreate the parameters in AWS SSM.
+1. **Configure AWS CLI**: Authenticate AWS CLI with first account.
+
+   ```bash
+   aws configure
+   ```
+
+1. **Import SSM Parameters**: Run the import script to read from `parameters.json` and recreate the parameters in AWS SSM.
 
    ```bash
    ./import_ssm_params_from_json.sh
