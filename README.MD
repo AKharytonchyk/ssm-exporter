@@ -16,20 +16,20 @@ This script exports AWS SSM parameters to a JSON file.
 
 #### Usage
 
-\`\`\`bash
+```bash
 ./export_ssm_params_to_json.sh [-p | --pathTemplate <path>] [-h | --help]
-\`\`\`
+```
 
 #### Options
 
-- \`-p, --pathTemplate\` : Specify the path template for SSM parameters. If not provided, all parameters will be pulled.
-- \`-h, --help\` : Display the help message.
+- `-p, --pathTemplate` : Specify the path template for SSM parameters. If not provided, all parameters will be pulled.
+- `-h, --help` : Display the help message.
 
 #### Example
 
-\`\`\`bash
+```bash
 ./export_ssm_params_to_json.sh -p /my/custom/path
-\`\`\`
+```
 
 If no path template is provided, the script will pull all parameters.
 
@@ -39,37 +39,37 @@ This script imports AWS SSM parameters from a JSON file created by the export sc
 
 #### Usage
 
-\`\`\`bash
+```bash
 ./import_ssm_params_from_json.sh [-h | --help]
-\`\`\`
+```
 
 #### Options
 
-- \`-h, --help\` : Display the help message.
+- `-h, --help` : Display the help message.
 
 #### Example
 
-\`\`\`bash
+```bash
 ./import_ssm_params_from_json.sh
-\`\`\`
+```
 
 ## Usage
 
-1. **Export SSM Parameters**: Run the export script to save SSM parameters to \`parameters.json\`.
+1. **Export SSM Parameters**: Run the export script to save SSM parameters to `parameters.json`.
 
-   \`\`\`bash
+   ```bash
    ./export_ssm_params_to_json.sh -p /my/custom/path
-   \`\`\`
+   ```
 
-2. **Import SSM Parameters**: Run the import script to read from \`parameters.json\` and recreate the parameters in AWS SSM.
+2. **Import SSM Parameters**: Run the import script to read from `parameters.json` and recreate the parameters in AWS SSM.
 
-   \`\`\`bash
+   ```bash
    ./import_ssm_params_from_json.sh
-   \`\`\`
+   ```
 
 ## Notes
 
-- Ensure that \`jq\` is installed and accessible in your PATH.
+- Ensure that `jq` is installed and accessible in your PATH.
 - Ensure that you have the necessary IAM permissions to read and write SSM parameters.
 
 ## License
