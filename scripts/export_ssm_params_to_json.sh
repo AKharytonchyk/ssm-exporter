@@ -1,7 +1,5 @@
 #!/bin/bash
 
-PREFIX="/test/param/"
-
 retry() {
   local retries=$1
   local command="${@:2}"
@@ -23,7 +21,41 @@ retry() {
   return 0
 }
 
-retry 5 aws ssm describe-parameters --parameter-filters "Key=Name,Option=BeginsWith,Values=$PREFIX" --query "Parameters[*].Name" --output text >parameters.txt
+show_help() {
+  echo "Usage: $0 [-p | --pathTemplate <path>] [-h | --help]"
+  echo
+  echo "Options:"
+  echo "  -p, --pathTemplate   Specify the path template for SSM parameters."
+  echo "  -h, --help           Display this help message."
+}
+
+PREFIX=""
+
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+  -p | --pathTemplate)
+    PREFIX="$2"
+    shift
+    ;;
+  -h | --help)
+    show_help
+    exit 0
+    ;;
+  *)
+    echo "Unknown parameter passed: $1"
+    show_help
+    exit 1
+    ;;
+  esac
+  shift
+done
+
+if [ -z "$PREFIX" ]; then
+  echo "No path template provided, pulling all parameters."
+  retry 5 aws ssm describe-parameters --query "Parameters[*].Name" --output text >parameters.txt
+else
+  retry 5 aws ssm describe-parameters --parameter-filters "Key=Name,Option=BeginsWith,Values=$PREFIX" --query "Parameters[*].Name" --output text >parameters.txt
+fi
 
 echo "[" >parameters.json
 
